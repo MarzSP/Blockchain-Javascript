@@ -1,0 +1,37 @@
+class Block {
+  constructor(index, timestamp, previousHash, data) {
+    this.index = index;
+    this.timestamp = timestamp;
+    this.previousHash = previousHash;
+    this.data = data;
+    this.hash = this.calculateHash();
+  }
+
+  calculateHash() {
+    // Here you can chose hashing algorithm to generate a hash for the block
+    return "";
+  }
+}
+
+class Blockchain {
+  constructor() {
+    this.chain = [new Block(0, Date.now(), null, "Genesis block")];
+  }
+
+  getLatestBlock() {
+    return this.chain[this.chain.length - 1];
+  }
+
+  addBlock(block) {
+    block.previousHash = this.getLatestBlock().hash;
+    block.hash = block.calculateHash();
+    this.chain.push(block);
+  }
+}
+
+// To create a new Blockchain such as my 'Marianne's Demo chain'
+const mariannesChain = new Blockchain();
+
+// Adding new blocks to my chain
+
+mariannesChain.addBlock(new Block(1, Date.now(), "", "Block data goes here"));
